@@ -1,0 +1,40 @@
+server:
+  port: 8091
+
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations:
+    - classpath:mapper/*.xml
+
+spring:
+  application:
+    name: echo-author
+
+  datasource:
+    username: root
+    password: 123456
+    url: jdbc:mysql://192.168.137.133:3306/echo_author?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.137.133:8848
+        namespace: echo
+        group: dev
+
+  data:
+    redis:
+      host: 192.168.137.149
+      port: 6479
+
+  kafka:
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+    bootstrap-servers:
+      - 192.168.137.133:29092

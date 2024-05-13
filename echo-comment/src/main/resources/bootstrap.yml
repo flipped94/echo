@@ -1,0 +1,27 @@
+server:
+  port: 8095
+
+spring:
+  application:
+    name: echo-comment
+
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.137.149:8848
+        namespace: echo
+        group: dev
+
+  data:
+    mongodb:
+      uri: mongodb://192.168.137.149:27017/echo_comment
+
+  kafka:
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+    bootstrap-servers:
+      - 192.168.137.133:29092

@@ -1,0 +1,36 @@
+server:
+  port: 8079
+
+spring:
+  application:
+    name: echo-gateway
+
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.137.149:8848
+        namespace: echo
+        group: dev
+
+#    gateway:
+#      globalcors:
+#        cors-configurations:
+#          '[/**]':
+#            allowedMethods: '*'
+#            allowedHeaders: '*'
+#            allowedOriginPatterns:
+#              - '*'
+#            allowCredentials: true
+
+#    gateway:
+#      routes:
+#        - id: auth-route
+#          uri: lb://echo-author
+#          predicates:
+#            - Path=/auth/**
+#            - Path=/user/**
+#
+#        - id: article-route
+#          uri: lb://echo-article
+#          predicates:
+#            - Path=/articles/**

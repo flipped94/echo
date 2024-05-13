@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.echo.feed.repository.dao.FeedPullEventMapper">
+
+    <resultMap id="resultMap" type="org.example.echo.feed.entity.FeedPullEvent">
+        <id column="id" property="id"/>
+        <result column="uid" property="uid"/>
+        <result column="type" property="type"/>
+        <result column="content" property="content"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+    
+    <insert id="insert" parameterType="org.example.echo.feed.entity.FeedPullEvent" useGeneratedKeys="true">
+        INSERT INTO
+            feed_pull_event(
+                uid,
+                `type`,
+                content,
+                create_time)
+        values(
+            #{uid},
+            #{type},
+            #{content},
+            #{create_time})
+    </insert>
+
+
+    <select id="getPullEventsWithType" resultMap="resultMap">
+        select * from
+            feed_pull_event
+        where uid in
+            <foreach collection="followeeIds" item="item" index="index" open="(" close=")" separator=",">
+                #{item}
+            </foreach>
+            and create_time &lt; #{timestamp} and `type`=#{type}
+        order by create_time desc
+        limit #{limit}
+    </select>
+
+</mapper>

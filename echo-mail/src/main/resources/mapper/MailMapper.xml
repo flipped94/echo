@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.echo.mail.dao.MailMapper">
+
+    <resultMap id="mailMap" type="org.example.echo.mail.entity.Mail">
+        <id column="id" property="id"/>
+        <id column="to" property="to"/>
+        <id column="to_id" property="toId"/>
+        <id column="subject" property="subject"/>
+        <id column="content" property="content"/>
+        <id column="status" property="status"/>
+        <id column="create_time" property="createTime"/>
+        <id column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO
+            mail(to, to_id, subject, content, status, create_time, update_time)
+        values
+            (#{mail.to}, #{mail.toId}, #{mail.subject}, #{mail.content}, #{mail.status}, #{mail.createTime}, #{mail.updateTime})
+    </insert>
+
+    <update id="updateStatus">
+        UPDATE
+            mail
+        SET
+            status=#{status},
+            update_time=#{updateTime}
+        WHERE
+            id=#{id}
+    </update>
+</mapper>

@@ -1,0 +1,35 @@
+[
+  {
+    $match: {
+      biz: "article",
+      bizId: 1247568948707201024,
+      _id: {
+        $eq: 1248226579000070144
+      }
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      replies: {
+        $filter: {
+          input: "$replies",
+          as: "item",
+          cond: {
+            $lt: ["$$item.id", 1248282262206681088]
+          }
+        }
+      }
+    }
+  },
+  {
+    $project: {
+      replies:{
+        $sortArray: {
+          input: "$replies",
+          sortBy: {createTime: -1}
+        }
+      }
+    }
+  }
+]

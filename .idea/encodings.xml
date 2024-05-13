@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
+    <file url="file://$PROJECT_DIR$/echo-article/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/echo-article/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/echo-author/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/echo-author/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/echo-comment/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/echo-comment/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/echo-common/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/echo-common/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/echo-feed/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/echo-feed/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/echo-follow/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/echo-follow/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/echo-gateway/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/echo-gateway/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/echo-interact/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/echo-interact/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/echo-mail/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/echo-mail/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/echo-mvc/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/echo-mvc/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/echo-oss/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/echo-oss/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/echo-search/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/echo-search/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/echo-service-sdk/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/echo-service-sdk/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/webook-dependencies/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/webook-dependencies/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/webook-post/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/webook-post/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/webook-sdk/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/webook-sdk/src/main/resources" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
+  </component>
+</project>

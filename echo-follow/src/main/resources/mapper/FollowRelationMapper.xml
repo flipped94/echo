@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.echo.follow.repository.dao.FollowRelationMapper">
+
+    <resultMap id="result" type="org.example.echo.follow.entity.FollowRelation">
+        <id column="id" property="id"/>
+        <result column="follower" property="follower"/>
+        <result column="followee" property="followee"/>
+        <result column="status" property="status"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <insert id="upsert" useGeneratedKeys="true" parameterType="org.example.echo.follow.entity.FollowRelation">
+        INSERT INTO
+            follow_relation(follower, followee, status, create_time, update_time)
+        VALUES(
+            #{follower}, #{followee}, #{status}, #{createTime}, #{updateTime}
+        ) ON DUPLICATE KEY UPDATE
+            status=values(status),
+            create_time=values(create_time),
+            update_time=values(update_time)
+    </insert>
+
+    <update id="updateStatus">
+        UPDATE
+            follow_relation
+        SET
+            status=#{status},
+            update_time=UNIX_TIMESTAMP()
+        where
+            follower=#{follower} AND followee=#{followee}
+    </update>
+
+    <select id="followRelationDetail" resultMap="result">
+        SELECT * FROM
+            follow_relation
+        WHERE
+            follower=#{follower} AND followee=#{followee} AND status = 1
+    </select>
+
+    <select id="followeeList" resultMap="result">
+        SELECT * FROM
+            follow_relation
+        WHERE
+            follower=#{follower} AND status = 1
+    </select>
+
+    <select id="followerList" resultType="org.example.echo.follow.entity.FollowRelation">
+        SELECT * FROM
+            follow_relation
+        WHERE
+            followee=#{followee} AND status = 1
+    </select>
+
+    <select id="cntFollower" resultType="java.lang.Long">
+        SELECT count(follower)
+        FROM
+            follow_relation
+        where
+            followee=#{uid} AND status = 1
+    </select>
+
+    <select id="cntFollowee" resultType="java.lang.Long">
+        SELECT count(followee)
+        FROM
+            follow_relation
+        where
+            follower=#{uid} AND status = 1
+    </select>
+
+</mapper>

@@ -1,0 +1,61 @@
+[
+  {
+    $match: {
+      biz: "article",
+      bizId: 1247568948707201024,
+      _id: {
+        $lt: 9223372036854775807
+      }
+    }
+  },
+  {
+    $addFields: {
+      totalReplies: {
+        $size: "$replies"
+      }
+    }
+  },
+  {
+    $sort: {
+      createTime: -1
+    }
+  },
+  {
+    $limit: 4
+  },
+  {
+    $project: {
+      _id: 1,
+      authorId: 1,
+      biz: 1,
+      bizId: 1,
+      content: 1,
+      createTime: 1,
+      updateTime: 1,
+      totalReplies: 1,
+      replies: {
+        $sortArray: {
+          input: "$replies",
+          sortBy: {
+            createTime: -1
+          }
+        }
+      }
+    }
+  },
+  {
+    $project: {
+      _id: 1,
+      authorId: 1,
+      biz: 1,
+      bizId: 1,
+      content: 1,
+      createTime: 1,
+      updateTime: 1,
+      totalReplies: 1,
+      replies: {
+        $slice: ["$replies", 4]
+      }
+    }
+  }
+]

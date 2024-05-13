@@ -1,0 +1,43 @@
+server:
+  port: 8098
+
+
+spring:
+  application:
+    name: echo-search
+
+  elasticsearch:
+    uris:
+      - https://localhost:9200
+    username: elastic
+    password: 123456
+
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.137.133:8848
+        namespace: echo
+        group: dev
+  servlet:
+    multipart:
+      max-file-size: 1073741824
+      max-request-size: 1073741824
+
+  kafka:
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: org.example.echo.sdk.article,org.example.echo.sdk.author
+    bootstrap-servers:
+      - 192.168.137.133:29092
+
+es:
+  server-url: https://localhost:9200
+  api-key: csruiXgwQsKHtcmNGKm1OA

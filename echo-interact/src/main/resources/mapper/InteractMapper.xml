@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.echo.interact.repository.dao.InteractMapper">
+
+    <resultMap id="resultMap" type="org.example.echo.interact.entity.Interact">
+        <id column="id" property="id"/>
+        <result column="biz" property="biz"/>
+        <result column="biz_id" property="bizId"/>
+        <result column="read_count" property="readCount"/>
+        <result column="like_count" property="likeCount"/>
+        <result column="collect_count" property="collectCount"/>
+        <result column="comment_count" property="commentCount"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <insert id="incrReadCount">
+        INSERT INTO
+            interact(biz, biz_id, read_count, create_time, update_time)
+        values(
+            #{biz}, #{bizId}, #{delta}, UNIX_TIMESTAMP(), UNIX_TIMESTAMP()
+        ) ON DUPLICATE KEY UPDATE
+            read_count=read_count+#{delta},
+            update_time=UNIX_TIMESTAMP()
+    </insert>
+
+    <insert id="incrLikeCount">
+        INSERT INTO
+            interact(biz, biz_id, like_count, create_time, update_time)
+        values(
+            #{biz}, #{bizId}, #{delta}, UNIX_TIMESTAMP(), UNIX_TIMESTAMP()
+        ) ON DUPLICATE KEY UPDATE
+            like_count=like_count+#{delta},
+            update_time=UNIX_TIMESTAMP()
+    </insert>
+
+    <insert id="incrCollectCount">
+        INSERT INTO
+            interact(biz, biz_id, collect_count, create_time, update_time)
+        values(
+            #{biz}, #{bizId}, #{delta}, UNIX_TIMESTAMP(), UNIX_TIMESTAMP()
+        ) ON DUPLICATE KEY UPDATE
+            collect_count=collect_count+#{delta},
+            update_time=UNIX_TIMESTAMP()
+    </insert>
+
+    <insert id="incrCommentCount">
+        INSERT INTO
+            interact(biz, biz_id, collect_count, create_time, update_time)
+        values(
+            #{biz}, #{bizId}, #{delta}, UNIX_TIMESTAMP(), UNIX_TIMESTAMP()
+        ) ON DUPLICATE KEY UPDATE
+            comment_count=comment_count+#{delta},
+            update_time=UNIX_TIMESTAMP()
+    </insert>
+
+    <select id="get" resultMap="resultMap">
+        select * from
+            interact
+        where
+            biz=#{biz} and biz_id=#{bizId}
+    </select>
+
+    <select id="getByBizAndIds" resultMap="resultMap">
+        select * from
+            interact
+        where
+            biz=#{biz} and biz_id in
+        <foreach collection="ids" open="(" separator="," close=")" item="bizId" index="index">
+            #{bizId}
+        </foreach>
+    </select>
+
+</mapper>
