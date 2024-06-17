@@ -38,7 +38,7 @@ public class FeedService {
     @Resource(name = "customThreadPool")
     private Executor executor;
 
-    public Long CreateFeedEvent(FeedEvent feedEvent) {
+    public Long createFeedEvent(FeedEvent feedEvent) {
         final FeedHandler handler = handlerMap.get(feedEvent.getType());
         if (handler == null) {
             log.error("没有对应 handler {}", feedEvent.getType());
@@ -48,7 +48,7 @@ public class FeedService {
     }
 
 
-    public List<FeedEvent> GetFeedEvents(Long uid, long timestamp, int limit) {
+    public List<FeedEvent> getFeedEvents(Long uid, long timestamp, int limit) {
         if (uid == null) {
             return Collections.emptyList();
         }

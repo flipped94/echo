@@ -18,7 +18,7 @@ public class ArticleFeedConsumer {
     public void createFeedEvent(FeedEvent event) {
         for (int i = 0; i < 3; i++) {
             try {
-                Long count = feedService.CreateFeedEvent(event);
+                Long count = feedService.createFeedEvent(event);
                 if (count > 0) {
                     break;
                 }

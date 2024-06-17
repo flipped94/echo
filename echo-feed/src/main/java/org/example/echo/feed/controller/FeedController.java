@@ -21,7 +21,7 @@ public class FeedController {
 
     @GetMapping
     public Result<List<FeedEvent>> findFeedEvents(FindFeedEventsRequest request) {
-        List<FeedEvent> res = feedService.GetFeedEvents(LoginUserContext.getUserId(), request.getTimestamp(), request.getLimit());
+        List<FeedEvent> res = feedService.getFeedEvents(LoginUserContext.getUserId(), request.getTimestamp(), request.getLimit());
         return Result.success(res);
     }
 }
