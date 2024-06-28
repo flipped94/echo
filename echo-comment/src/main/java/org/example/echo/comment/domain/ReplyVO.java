@@ -20,7 +20,7 @@ public class ReplyVO {
 
     private AuthorVO replyTo;
 
-    // 评论或回复
+    // 评论或回复 comment reply
     private String type;
 
     private String content;

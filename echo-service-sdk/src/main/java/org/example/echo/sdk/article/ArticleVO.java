@@ -16,6 +16,7 @@ public class ArticleVO implements Serializable {
     private String title;
     private String content;
     private String abstraction;
+    private String cover;
     private List<String> tags;
     private AuthorVO author;
     private Integer status;

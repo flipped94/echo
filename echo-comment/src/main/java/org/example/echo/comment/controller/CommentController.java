@@ -48,9 +48,9 @@ public class CommentController {
     public Result<List<ReplyVO>> getMoreReply(
             @RequestParam("biz") String biz,
             @RequestParam("bizId") Long bizId,
-            @RequestParam("minCommentId") Long minCommentId,
-            @RequestParam("limit") Long limit) {
-        final List<ReplyVO> replies = commentService.getMoreRely(biz, bizId, minCommentId, limit);
+            @RequestParam("rootCommentId") Long rootCommentId,
+            @RequestParam("minReplyId") Long minReplyId) {
+        final List<ReplyVO> replies = commentService.getMoreRely( biz,  bizId,  rootCommentId,  minReplyId);
         return Result.success(replies);
     }
 }

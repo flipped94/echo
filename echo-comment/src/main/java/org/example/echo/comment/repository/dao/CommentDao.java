@@ -140,14 +140,21 @@ public class CommentDao {
                                         new Document("input", "$replies")
                                                 .append("sortBy",
                                                         new Document("createTime", -1L)))))));
-        List<Reply> replies = new ArrayList<>();
-        final Gson gson = new Gson();
-        result.forEach(document -> {
-            final String s = document.toJson();
-            final Reply reply = gson.fromJson(s, Reply.class);
-            replies.add(reply);
-        });
+        List<Reply> data = new ArrayList<>();
+        Gson gson = new Gson();
+        final Document first = result.first();
+        if (first != null) {
+            final List<Document> documents = (List<Document>) first.get("replies");
+            documents.forEach(document -> {
+                final String s = document.toJson();
+                final Reply reply = gson.fromJson(s, Reply.class);
+                reply.setBiz(biz);
+                reply.setBizId(bizId);
+                reply.setRootId(rootCommentId);
+                data.add(reply);
+            });
+        }
 
-        return replies;
+        return data;
     }
 }
