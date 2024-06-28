@@ -158,4 +158,13 @@ public class ArticleReaderRepository {
             log.error("设置author失败 {}", e.getMessage(), e);
         }
     }
+
+    public List<ArticleVO> listPub(long time, long days, long offset, long batchSize) {
+        List<PublishedArticle> articlePageResult = articleReaderDao.listPub(time, days, offset, batchSize);
+        final List<ArticleVO> datas = articlePageResult
+                .stream()
+                .map(ArticleConverter.INSTANCE::toArticleVOIgnoreContent).toList();
+        setInteract(datas, null);
+        return datas;
+    }
 }

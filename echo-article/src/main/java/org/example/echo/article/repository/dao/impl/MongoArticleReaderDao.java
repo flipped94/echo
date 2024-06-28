@@ -20,6 +20,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -87,11 +88,41 @@ public class MongoArticleReaderDao implements ArticleReaderDao {
         return buildResult(req, result);
     }
 
+    @Override
+    public List<PublishedArticle> listPub(long time, long days, long offset, long batchSize) {
+        final List<Document> query = buildPipeline(time, days, offset, batchSize);
+        MongoCollection<Document> collection = mongoTemplate.getCollection("published_articles");
+        AggregateIterable<Document> datas = collection.aggregate((query));
+        return buildResult(datas);
+    }
+
+    private static List<PublishedArticle> buildResult(AggregateIterable<Document> result) {
+        List<PublishedArticle> res = new ArrayList<>();
+        for (Document document : result) {
+            final String json = document.toJson();
+            final Gson gson = new Gson();
+            final Article publishedArticle = gson.fromJson(json, Article.class);
+            final PublishedArticle article = ArticleConverter.INSTANCE.toPublishedArticle(publishedArticle);
+            res.add(article);
+        }
+        return res;
+    }
+
+    private static List<Document> buildPipeline(long time, long days, long offset, long batchSize) {
+        return Arrays.asList(new Document("$match",
+                        new Document("updateTime",
+                                new Document("$gt", time - days))),
+                new Document("$sort",
+                        new Document("updateTime", -1L)),
+                new Document("$skip", offset),
+                new Document("$limit", batchSize));
+    }
+
     private static List<Document> buildPipeline(ListReq req) {
-        final long skip = (req.getPage() - 1) * req.getPageSize();
+        final long skip = (long) (req.getPage() - 1) * req.getPageSize();
         return Arrays.asList(new Document("$match", new Document()),
                 new Document("$facet", new Document("total",
-                        Arrays.asList(new Document("$count", "count")))
+                        List.of(new Document("$count", "count")))
                         .append("paginated", Arrays.asList(new Document("$sort", new Document("updateTime", -1L)),
                                 new Document("$skip", skip), new Document("$limit", req.getPageSize())))),
                 new Document("$project", new Document("total", new Document("$arrayElemAt",

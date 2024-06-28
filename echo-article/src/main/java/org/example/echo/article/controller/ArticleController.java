@@ -14,6 +14,8 @@ import org.example.echo.mvcconfig.LoginUserContext;
 import org.example.echo.sdk.article.ArticleVO;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/articles")
 public class ArticleController {
@@ -102,5 +104,15 @@ public class ArticleController {
     public Result<PageResult<ArticleVO>> readerPubList(ListReq req) {
         PageResult<ArticleVO> result = articleService.readerPubList(req);
         return Result.success(result);
+    }
+
+    @LoginNotRequired
+    @GetMapping("/listpub")
+    public Result<List<ArticleVO>> listPub(@RequestParam("time") long time,
+                                           @RequestParam("days") long days,
+                                           @RequestParam("offset") long offset,
+                                           @RequestParam("batchSize") long batchSize) {
+        List<ArticleVO> res = articleService.listPub(time, days, offset, batchSize);
+        return Result.success(res);
     }
 }

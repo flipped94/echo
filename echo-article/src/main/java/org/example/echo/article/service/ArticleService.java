@@ -23,6 +23,7 @@ import org.example.echo.sdk.feed.FeedEvent;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Executor;
 
@@ -157,5 +158,9 @@ public class ArticleService {
 
     public PageResult<ArticleVO> readerPubList(ListReq req) {
         return articleReaderRepository.readerPubList(req);
+    }
+
+    public List<ArticleVO> listPub(long time, long days, long offset, long batchSize) {
+        return articleReaderRepository.listPub(time, days, offset, batchSize);
     }
 }

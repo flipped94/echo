@@ -4,6 +4,8 @@ import org.example.common.vo.PageResult;
 import org.example.echo.article.domain.ListReq;
 import org.example.echo.article.entity.PublishedArticle;
 
+import java.util.List;
+
 public interface ArticleReaderDao {
 
     long Upsert(PublishedArticle publishedArticle);
@@ -13,4 +15,6 @@ public interface ArticleReaderDao {
     PublishedArticle getById(Long id);
 
     PageResult<PublishedArticle> readerPubList(ListReq req);
+
+    List<PublishedArticle> listPub(long time,long days, long offset, long batchSize);
 }
