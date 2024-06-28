@@ -1,0 +1,31 @@
+server:
+  port: 7081
+
+spring:
+  application:
+    name: echo-article
+
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.137.149:8848
+        namespace: echo
+        group: dev
+
+  data:
+    mongodb:
+      uri: mongodb://192.168.137.149:27017/echo_article
+
+    redis:
+      host: 192.168.137.149
+      port: 6479
+
+xxl:
+  job:
+    admin-addresses: http://192.168.137.133:7080/xxl-job-admin
+    app-name: echo-job
+    ip:
+    port: 9999
+    log-path: /data/applogs/xxl-job/jobhandler
+    log-retention-days: 3
+    access-token: default_token

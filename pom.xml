@@ -22,6 +22,7 @@
         <module>echo-feed</module>
         <module>echo-search</module>
         <module>echo-mail</module>
+        <module>echo-ranking</module>
     </modules>
     <packaging>pom</packaging>
 
